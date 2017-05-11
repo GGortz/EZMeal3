@@ -22,7 +22,7 @@ public class Recherche_Simple extends AppCompatActivity{
 
     public void onBtnClick(View v) {
         if (v.getId() == R.id.bMotclef) {
-            Intent affciherlisterecette2 = new Intent(RechercheSimple.this, AfficherRecette.class); //changement d'activity
+            Intent affciherlisterecette2 = new Intent(Recherche_Simple.this, Afficher_Recette.class); //changement d'activity
             EditText ingredientvoulu = (EditText) findViewById(R.id.ETmotClef); //le mot clef tappé
             String stringredientvoulu = ingredientvoulu.getText().toString();
             affciherlisterecette2.putExtra("ingredients", stringredientvoulu); //On envoie le mot clef dans l'activité d'affichage

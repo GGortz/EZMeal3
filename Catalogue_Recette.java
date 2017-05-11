@@ -27,17 +27,17 @@ public class Catalogue_Recette extends AppCompatActivity{
     @Override
     public void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
-        setContentView(R.layout.afficher_liste_recette);
+        setContentView(R.layout.catalogue_recette);
 
         listview4 = (ListView)findViewById(R.id.listView4);
         toolbar4 = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar4);
         toolbar4.setTitle("Catalogue");
         ArrayList<String> listerecette = new ArrayList<>();
         listerecette = myManager.getRecetteArray();
-        ArrayAdapter<String> mAdapter4 = new ArrayAdapter<>(com.ezmeal.groupeh.ezmeal.Catalogue.this, android.R.layout.simple_list_item_1, listerecette);
+        ArrayAdapter<String> mAdapter4 = new ArrayAdapter<>(Catalogue_Recette.this, android.R.layout.simple_list_item_1, listerecette);
         listview4.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> adapterView4, View view4, int i4, long l4){
-                Intent intent4 = new Intent(com.ezmeal.groupeh.ezmeal.Catalogue.this, Main5Activity.class);
+                Intent intent4 = new Intent(Catalogue_Recette.this, Afficher_Recette.class);
                 intent4.putExtra("recettes", listview4.getItemAtPosition(i4).toString());
                 startActivity(intent4);
             }

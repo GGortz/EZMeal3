@@ -27,17 +27,17 @@ public class Afficher_Ingredient  extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.afficher_liste_ingredient);
+        setContentView(R.layout.afficher_ingredient);
 
         String ingredient = getIntent().getStringExtra("souscategories");
         toolbar3 = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar3);
         toolbar3.setTitle("Ingrédients");
         ArrayList<String> listeingredient = myManager.getIngredientSC(ingredient);
         listView3 = (ListView) findViewById(R.id.listView3);
-        ArrayAdapter<String> mAdapter3 = new ArrayAdapter<>(AfficherIngredient.this, android.R.layout.simple_list_item_1, listeingredient);
+        ArrayAdapter<String> mAdapter3 = new ArrayAdapter<>(Afficher_Ingredient.this, android.R.layout.simple_list_item_1, listeingredient);
         listView3.setOnItemClickListener (new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> adapterView3, View view3, int i3, long l3){
-                Intent intent3 = new Intent(AfficherIngredient.this, AfficherRecette.class);
+                Intent intent3 = new Intent(Afficher_Ingredient.this, Afficher_Recette.class);
                 intent3.putExtra("ingredients", listView3.getItemAtPosition(i3).toString());
                 startActivity(intent3);
             }

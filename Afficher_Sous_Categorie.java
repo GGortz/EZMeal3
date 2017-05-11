@@ -25,17 +25,17 @@ public class Afficher_Sous_Categorie  extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.afficher_liste_sous_categorie);
+        setContentView(R.layout.afficher_sous_categorie);
         String sc = getIntent().getStringExtra("categories");
 
         toolbar2 = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar2);
         toolbar2.setTitle("Sous-catégories");
         listView2 = (ListView) findViewById(R.id.listView2);
         ArrayList<String> listesouscategorie = myManager.getSousCategorie(sc);
-        ArrayAdapter<String> mAdapter2 = new ArrayAdapter<>(AfficherSousCategorie.this, android.R.layout.simple_list_item_1, listesouscategorie);
+        ArrayAdapter<String> mAdapter2 = new ArrayAdapter<>(Afficher_Sous_Categorie.this, android.R.layout.simple_list_item_1, listesouscategorie);
         listView2.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> adapterView2, View view2, int i2, long l2){
-                Intent intent2 = new Intent(AfficherSousCategorie.this, AfficherIngredient.class);
+                Intent intent2 = new Intent(Afficher_Sous_Categorie.this, Afficher_Ingredient.class);
                 intent2.putExtra("souscategories", listView2.getItemAtPosition(i2).toString());
                 startActivity(intent2);
             }

@@ -67,7 +67,7 @@ public class Compte extends AppCompatActivity implements AdapterView.OnItemSelec
         adapter3 = ArrayAdapter.createFromResource(this, R.array.spinner3, android.R.layout.simple_spinner_dropdown_item);
         spinner3 = (Spinner) findViewById(R.id.SPsexe);
         spinner3.setAdapter(adapter3);
-        spinner3.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) UserInfo.this);
+        spinner3.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) Compte.this);
 
         String sexe = manager.searchData(login, "Sexe");
         spinner3.setSelection(adapter3.getPosition(sexe));
@@ -96,7 +96,7 @@ public class Compte extends AppCompatActivity implements AdapterView.OnItemSelec
 
     public void onBtnClick(View v) {
         if (v.getId() == R.id.MCMenu) {
-            Intent retour = new Intent(UserInfo.this, Menu.class); //On revient au menu principal
+            Intent retour = new Intent(Compte.this, Menu.class); //On revient au menu principal
             startActivity(retour);
         }
 
@@ -122,11 +122,11 @@ public class Compte extends AppCompatActivity implements AdapterView.OnItemSelec
             String paysstr = pays.getText().toString();  //pays
 
             if(!passwordstr.equals(confirmerstr)){  //si les 2 mdp ne sont pas Ã©gaux.
-                Toast mdp = Toast.makeText(UserInfo.this , "Les Mots de passe ne correspondent pas!" , Toast.LENGTH_SHORT);
+                Toast mdp = Toast.makeText(Compte.this , "Les Mots de passe ne correspondent pas!" , Toast.LENGTH_SHORT);
                 mdp.show();
             }
             else{  //si les mdp sont les memes
-                User u = new User();
+                Utilisateur u = new Utilisateur();
                 u.setLogin(loginstr);  //login
                 u.setMois(moisstr);  //mois
                 u.setAnnee(anneestr);  //annee
@@ -144,7 +144,7 @@ public class Compte extends AppCompatActivity implements AdapterView.OnItemSelec
 
                 //manager.updateUser(u, loginu);
 
-                Intent gh = new Intent(UserInfo.this, Menu.class); //changement d'activity
+                Intent gh = new Intent(Compte.this, Menu.class); //changement d'activity
                 startActivity(gh);
             }
 

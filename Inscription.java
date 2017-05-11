@@ -26,7 +26,7 @@ public class Inscription extends AppCompatActivity implements AdapterView.OnItem
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sinscrire);
+        setContentView(R.layout.inscription);
         manager = new DBHelper(this);
 
         //spinner du sexe

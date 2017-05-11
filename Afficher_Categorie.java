@@ -25,16 +25,16 @@ public class Afficher_Categorie  extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.afficher_liste_categorie);
+        setContentView(R.layout.afficher_categorie);
 
         toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Catégories");
         listView =(ListView) findViewById(R.id.listView);
         ArrayList<String> listecategorie = myManager.getCategorie(); //Afficher toute les caté
-        ArrayAdapter<String> mAdapter = new ArrayAdapter<>(AfficherCategorie.this, android.R.layout.simple_list_item_1, listecategorie);
+        ArrayAdapter<String> mAdapter = new ArrayAdapter<>(Afficher_Categorie.this, android.R.layout.simple_list_item_1, listecategorie);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l){
-                Intent intent = new Intent(AfficherCategorie.this, AfficherSousCategorie.class);
+                Intent intent = new Intent(Afficher_Categorie.this, Afficher_Sous_Categorie.class);
                 intent.putExtra("categories", listView.getItemAtPosition(i).toString());  //envoie le nom de la sous cate choisie
                 startActivity(intent);
             }
