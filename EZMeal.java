@@ -20,7 +20,7 @@ public class EZMeal extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.ezmeal);
 
     }
 
@@ -32,38 +32,33 @@ public class EZMeal extends AppCompatActivity {
         if(v.getId() == R.id.bLogin){
 
 
-            EditText e = (EditText)findViewById(R.id.ETemail); //on choppe ce qui est mit dans le field login
-            String stre = e.getText().toString(); //et on le transfo en String
+            EditText e = (EditText)findViewById(R.id.ETemail); //On recupère le login
+            String stre = e.getText().toString();
 
-            EditText f = (EditText)findViewById(R.id.ETmdp); //on choppe ce qui est mit dans le field mdp
-            String strf = f.getText().toString(); //et on le transfo en String
-            //on regarde si le login et le mdp correspondent dans la bdd
+            EditText f = (EditText)findViewById(R.id.ETmdp); //On recupère le mdp
+            String strf = f.getText().toString();
+
+            //On vérifie la concordance du login et du mdp
             String mdp = manager.searchMdp(stre);
-            showMessage(stre, stre);
-            //if(true){
+            showMessage("Bienvenue", stre);
             if(strf.equals(mdp)){
                 //On enregisre le Login de l'utilisateur afin de savoir acceder a ses donnees
                 SharedPreferences info = getSharedPreferences("InfoUser",0);
                 SharedPreferences.Editor editeur = info.edit();
-                editeur.putString("LoginUser",((EditText)findViewById(R.id.ETemail)).getText().toString());//changer Email
+                editeur.putString("LoginUser",((EditText)findViewById(R.id.ETemail)).getText().toString());
                 editeur.apply();
-
                 Toast.makeText(this, "Login Sauvé", Toast.LENGTH_LONG).show();
-
-                //changement d'activity
-                Intent i = new Intent(MainActivity.this, Menu.class);
+                Intent i = new Intent(EZMeal.this, Menu.class);
                 startActivity(i);
             }
             else{
-                Toast tryAgain = Toast.makeText(MainActivity.this , "Mauvais mot de passe ou email..." , Toast.LENGTH_SHORT);
+                Toast tryAgain = Toast.makeText(EZMeal.this , "Mauvais mot de passe ou login..." , Toast.LENGTH_SHORT);
                 tryAgain.show();
             }
-
         }
 
-
         if(v.getId() == R.id.bSinscrire){  //ok
-            Intent g = new Intent(MainActivity.this, Inscription.class); //changement d'activity
+            Intent g = new Intent(EZMeal.this, Inscription.class); //changement d'activity
             startActivity(g);
         }
     }

@@ -11,7 +11,7 @@ public class Menu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ezmeal);
+        setContentView(R.layout.ezmeal);
     }
 
     DBHelper db = new DBHelper(this);
