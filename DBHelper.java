@@ -19,7 +19,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     private static final int DATABASE_VERSION = 1; //version de la DB  (136 old)
-    private static final String DATABASE_NAME = "EZMeal.db";  //nom de la db
+    private static final String DATABASE_NAME = "DB.db";  //nom de la db
 
     //Table d'utilisateur
     private static final String TABLE_NAME = "Utilisateur";
