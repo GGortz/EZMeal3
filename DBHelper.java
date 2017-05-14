@@ -4,16 +4,16 @@ package be.lsinf1225.ezmeal;
  * Created by Gaetan on 11/05/2017.
  */
 
-        import android.app.AlertDialog;
-        import android.content.ContentValues;
-        import android.content.SharedPreferences;
-        import android.database.Cursor;
-        import android.database.sqlite.SQLiteDatabase;
-        import android.database.sqlite.SQLiteOpenHelper;
-        import android.content.Context;
-        import android.util.Log;
-        import android.widget.Toast;
-        import java.util.ArrayList;
+import android.app.AlertDialog;
+import android.content.ContentValues;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
+import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
 
