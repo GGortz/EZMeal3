@@ -257,7 +257,7 @@ public class DBHelper extends SQLiteOpenHelper {
         cate30.put(COLUMN_SCAT1, "Champignon");
         db.insert(TABLE_NAME3, null, cate30);
         ContentValues cate31 = new ContentValues();
-        cate21.put(COLUMN_CAT, "Féculent");
+        cate31.put(COLUMN_CAT, "Féculent");
         cate31.put(COLUMN_SCAT1, "Féculent");
         db.insert(TABLE_NAME3, null, cate31);
         ContentValues cate32 = new ContentValues();
@@ -911,7 +911,7 @@ public class DBHelper extends SQLiteOpenHelper {
     //Création d'un arraylist qui contient les titres de toutes les recettes pour le catalogue
     public ArrayList<String> getRecetteArray(){
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT NomR FROM " + TABLE_NAME2;
+        String query = "SELECT NomR FROM " + TABLE_NAME2 + " ORDER BY NomR";
         Cursor c = db.rawQuery(query, null);
         ArrayList<String> listData = new ArrayList<>();
         c.moveToFirst();
@@ -942,7 +942,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public ArrayList<String> getIngredientSC(String sc){
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<String> listIngredientSC = new ArrayList<String>();
-        String query = "SELECT "+COLUMN_INGREDIENT1+" FROM "+TABLE_NAME4+" WHERE "+COLUMN_SCAT2+" == '"+sc+"'";
+        String query = "SELECT "+COLUMN_INGREDIENT1+" FROM "+TABLE_NAME4+" WHERE "+COLUMN_SCAT2+" == '"+sc+"' ORDER BY "+COLUMN_INGREDIENT1;
         Cursor c = db.rawQuery(query, null);
         c.moveToFirst();
         while (!c.isAfterLast()) {
@@ -958,7 +958,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public ArrayList<String> getSousCategorie(String categorie){
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<String> listesouscategorie = new ArrayList<String>();
-        String query = "SELECT "+COLUMN_SCAT1+" FROM "+TABLE_NAME3+" WHERE "+COLUMN_CAT+" == '"+categorie+"'";
+        String query = "SELECT "+COLUMN_SCAT1+" FROM "+TABLE_NAME3+" WHERE "+COLUMN_CAT+" == '"+categorie+"' ORDER BY "+COLUMN_SCAT1;
         Cursor c = db.rawQuery(query, null);
         c.moveToFirst();
         while (!c.isAfterLast()){
@@ -974,7 +974,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public ArrayList<String> getCategorie(){
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<String> listecategorie = new ArrayList<String>();
-        String query = "SELECT DISTINCT "+COLUMN_CAT+" FROM "+TABLE_NAME3;
+        String query = "SELECT DISTINCT "+COLUMN_CAT+" FROM "+TABLE_NAME3+" ORDER BY "+COLUMN_CAT;
         Cursor c = db.rawQuery(query, null);
         c.moveToFirst();
         while (!c.isAfterLast()){
@@ -1000,7 +1000,16 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+/*
+    public void insertUtilisateur(String slogin, String spassword, String sville, String spays, String homme, int ijnaissance, int imnaissance, int ianaissance) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String partie2 = "VALUES '"+slogin+"', '"+spassword+"', '"+sville+"', '"+spays+"', '"+homme+"', '"+ijnaissance+"', '"+imnaissance+"', '"+ianaissance+"'";
+        String partie1 = "INSERT INTO Utilisateur ('Login', 'Password', 'Ville', 'Pays', 'Sexe', 'Jour', 'Mois', 'Annee') ";
+        String complet = partie1+partie2;
+        db.execSQL(complet);
 
+    }
+*/
 }
 
 

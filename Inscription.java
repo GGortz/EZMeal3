@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 public class Inscription extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
-    DBHelper manager;
+    DBHelper db;
     ArrayAdapter adapter3;
     Spinner spinner3;
 
@@ -27,7 +27,7 @@ public class Inscription extends AppCompatActivity implements AdapterView.OnItem
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inscription);
-        manager = new DBHelper(this);
+        db = new DBHelper(this);
 
         //spinner du sexe
         adapter3 = ArrayAdapter.createFromResource(this, R.array.spinner3, android.R.layout.simple_spinner_dropdown_item);
@@ -59,47 +59,45 @@ public class Inscription extends AppCompatActivity implements AdapterView.OnItem
     public void onBtnClick(View v){
         if(v.getId() == R.id.bSinscrireForm){
             //add sexe
-            TextView prenom = (EditText)findViewById(R.id.ETprenom);  //login
-            //TextView nom = (EditText)findViewById(R.id.ETnom);
-            TextView age = (EditText)findViewById(R.id.ETage);  //jour de naissance
-            TextView email = (EditText)findViewById(R.id.ETemail);  //ville
+            TextView login = (EditText)findViewById(R.id.ETprenom);  //login
+            TextView jnaissance = (EditText)findViewById(R.id.ETage);  //jour de naissance
+            TextView ville = (EditText)findViewById(R.id.ETemail);  //ville
             TextView password = (EditText)findViewById(R.id.ETmdp);  //mot de passe
             TextView confirmer = (EditText)findViewById(R.id.ETconfirmer);  //confirmer
-            TextView mois = (EditText)findViewById(R.id.ETmois);  //mois de naissance
-            TextView annee = (EditText)findViewById(R.id.ETannee);  //annee de naissance
+            TextView mnaissance = (EditText)findViewById(R.id.ETmois);  //mois de naissance
+            TextView anaissance = (EditText)findViewById(R.id.ETannee);  //annee de naissance
             TextView pays = (EditText)findViewById(R.id.ETpays);  //pays
 
-            String prenomstr = prenom.getText().toString();  //login
-            //String nomstr = nom.getText().toString();  //
-            int agestr = Integer.parseInt(age.getText().toString());  //jour de naissance
-            int anneestr = Integer.parseInt(annee.getText().toString());  //anne de naissance
-            int moisstr = Integer.parseInt(mois.getText().toString());  //mois de naissance
-            String emailstr = email.getText().toString();  //ville
-            String passwordstr = password.getText().toString();  //mdp
-            String confirmerstr = confirmer.getText().toString();  //mdpconfirmer
-            String paysstr = pays.getText().toString();  //pays
+            String slogin = login.getText().toString();  //login
+            int ijnaissance = Integer.parseInt(jnaissance.getText().toString());  //jour de naissance
+            int ianaissance = Integer.parseInt(anaissance.getText().toString());  //anne de naissance
+            int imnaissance = Integer.parseInt(mnaissance.getText().toString());  //mois de naissance
+            String sville = ville.getText().toString();  //ville
+            String spassword = password.getText().toString();  //mdp
+            String sconfirmer = confirmer.getText().toString();  //mdpconfirmer
+            String spays = pays.getText().toString();  //pays
 
 
 
-            if(!passwordstr.equals(confirmerstr)){  //si les 2 mdp ne sont pas égaux.
+            if(!spassword.equals(sconfirmer)){  //si les 2 mdp ne sont pas égaux.
                 Toast mdp = Toast.makeText(Inscription.this , "Les Mots de passe ne correspondent pas!" , Toast.LENGTH_SHORT);
                 mdp.show();
             }
             else{  //si les mdps sont égaux, on crée un user
                 Utilisateur u = new Utilisateur();
-                u.setLogin(prenomstr);  //login
-                u.setMois(moisstr);  //mois
-                u.setAnnee(anneestr);  //annee
-                u.setPays(paysstr); //pays
-                u.setJour(agestr);  //age
-                u.setVille(emailstr); //ville
-                u.setMdp(passwordstr);  //mdp
+                u.setLogin(slogin);  //login
+                u.setMois(imnaissance);  //mois
+                u.setAnnee(ianaissance);  //annee
+                u.setPays(spays); //pays
+                u.setJour(ijnaissance);  //age
+                u.setVille(sville); //ville
+                u.setMdp(spassword);  //mdp
                 String sexestr = spinner3.getItemAtPosition(spinner3.getSelectedItemPosition()).toString();
                 u.setSexe(sexestr);  //sexe
-                showMessage(prenomstr+moisstr+anneestr+paysstr+sexestr+passwordstr, Integer.toString(moisstr));
-                //manager.insertUser(u);
+                //db.insertUser(u);
+                db.insertUtilisateur(slogin, spassword, sville, spays, "Homme", ijnaissance, imnaissance, ianaissance);
                 showMessage("Apres", "Insert");
-                Intent h = new Intent(Inscription.this, Menu.class); //changement d'activity
+                Intent h = new Intent(Inscription.this, EZMeal.class); //changement d'activity
                 startActivity(h);
             }
 
