@@ -1,6 +1,34 @@
 package be.lsinf1225.ezmeal;
 
+import android.content.Intent;
+import android.media.audiofx.AudioEffect;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RatingBar;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+
+import static be.lsinf1225.ezmeal.R.id.arcom;
+import static be.lsinf1225.ezmeal.R.id.arcomplexite;
+import static be.lsinf1225.ezmeal.R.id.arcouv;
+import static be.lsinf1225.ezmeal.R.id.ardescription;
+import static be.lsinf1225.ezmeal.R.id.aretape;
+import static be.lsinf1225.ezmeal.R.id.arimage;
+import static be.lsinf1225.ezmeal.R.id.aringredient;
+import static be.lsinf1225.ezmeal.R.id.arrating;
+import static be.lsinf1225.ezmeal.R.id.artcuis;
+import static be.lsinf1225.ezmeal.R.id.artitre;
+import static be.lsinf1225.ezmeal.R.id.artprep;
+import static be.lsinf1225.ezmeal.R.id.text;
+import static be.lsinf1225.ezmeal.R.layout.afficher_recette;
 
 /**
  * Created by Gaetan on 11/05/2017.
@@ -8,134 +36,87 @@ import android.support.v7.app.AppCompatActivity;
  */
 
 public class Afficher_Recette extends AppCompatActivity {
-
-/*
-    DBHelper myManager = new DBHelper(this);
+        DBHelper db = new DBHelper(this);
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.afficher_recette);
+        setContentView(afficher_recette);
+
+        String nomrecette = getIntent().getStringExtra("recettes");
+        int i = db.getId(nomrecette);
 
 
-        String titreFlag = getIntent().getStringExtra("titreFlag"); //on choppe la lettre qui vient de l'activité précédente
-        Toast.makeText(Afficher_Recette.this, titreFlag, Toast.LENGTH_SHORT).show();
+        //Titre
+        TextView titre = (TextView) findViewById(artitre);
+        String rtitre = db.searchData2(i,"NomR");
+        titre.setText(rtitre);
 
-        //titre
-        TextView titre = (TextView) findViewById(R.id.TVtitre);
-        titre.setText(titreFlag);
+        //Image  a finir
+        ImageView image = (ImageView) findViewById(arimage);
+        int idimage = R.drawable.r1;
+        image.setImageResource(idimage);
 
-        //image
-        //String imgBDD = myManager.searchData2(titreFlag, "image");
-        //Toast.makeText(Afficher_Recette.this, imgBDD, Toast.LENGTH_SHORT).show();
+        //Description
+        TextView description = (TextView) findViewById(ardescription);
+        String rdescription = db.searchData2(i, "Description");
+        //String rdescription = "redescription";
+        description.setText(rdescription);
 
-        ImageView iv = (ImageView) findViewById(IVbig);;
-        int[] IMAGES = {R.mipmap.imgbig1, R.mipmap.imgbig2, R.mipmap.imgbig3, R.mipmap.imgbig4, R.mipmap.imgbig5, R.mipmap.imgbig6, R.mipmap.imgbig7, R.mipmap.imgbig8, R.mipmap.imgbig9, R.mipmap.imgbig10,
-                R.mipmap.imgbig11, R.mipmap.imgbig12, R.mipmap.imgbig13, R.mipmap.imgbig14, R.mipmap.imgbig15, R.mipmap.imgbig16, R.mipmap.imgbig17, R.mipmap.imgbig18};
-        //R.mipmap.img13 R.mipmap.img14, R.mipmap.img15, R.mipmap.img16};
-        for(int m=1; m<=IMAGES.length; m++){
-            if(imgBDD.equals("img"+m)){
-                //if(Integer.toString(IMAGES[m]).equals(imgFromBDD)){  //Si l'image correspond dans la bdd
-                iv.setImageResource(IMAGES[m-1]);
-            }
-            else{
+        //Prix
+        TextView prix = (TextView) findViewById(R.id.arprix);
+        String rprix = db.searchData2(i, "Cout");
+        //String rprix = "rprix";
+        prix.setText(rprix);
 
-            }
-        }
+        //Temps préparation
+        TextView tprep = (TextView) findViewById(artprep);
+        String rtprep = db.searchData2(i, "Tpreparation");
+        //String rtprep = "rtprep";
+        tprep.setText(rtprep);
 
-        //les aliments de la recette ok
-        ArrayList arr = new ArrayList();
-        ArrayList arr2 = new ArrayList();
-        //arr = myManager.getAlimentsRecette(titreFlag,"aliment");
-        //arr2 = myManager.getAlimentsRecette(titreFlag,"quantite");
-        TextView aliments = (TextView) findViewById(R.id.TValiments);
-        String result = TextUtils.join(System.getProperty("line.separator"), arr);
-        aliments.setText(result);
-        TextView quantite = (TextView) findViewById(R.id.TVquantite);
-        String result2 = TextUtils.join(System.getProperty("line.separator"), arr2);
-        quantite.setText(result2);
-        //le reste
-        String descriptionFromBDD = myManager.searchData2(titreFlag, "description");
-        TextView description = (TextView) findViewById(R.id.TVdescription);
-        description.setText(descriptionFromBDD);
+        //Temps cuisson
+        TextView tcuis = (TextView) findViewById(artcuis);
+        String rtcuis = db.searchData2(i, "Tcuisson");
+        //String rtcuis = "rtcuis";
+        tcuis.setText(rtcuis);
 
-        String etapeFromBDD = myManager.searchData2(titreFlag, "etape");
-        TextView etape = (TextView) findViewById(R.id.TVetapes);
-        etape.setText(etapeFromBDD);
+        //Nbre couv
+        TextView ncouv = (TextView) findViewById(arcouv);
+        String rncouv = db.searchData2(i, "NbreCouv");
+        //String rncouv = "rncouv";
+        ncouv.setText(rncouv);
 
-        String tpreparatoinFromBDD = myManager.searchData2(titreFlag, "Tpreparation");
-        TextView tprepa = (TextView) findViewById(R.id.TVpreparation);
-        tprepa.setText(tpreparatoinFromBDD);
+        //Complexité
+        TextView complex = (TextView) findViewById(arcomplexite);
+        String rcomplexite = db.searchData2(i, "Difficulte");
+        //String rcomplexite = "rcomplexité";
+        complex.setText(rcomplexite);
 
-        String tcuissonFromBDD = myManager.searchData2(titreFlag, "Tcuisson");
-        TextView tcuiss = (TextView) findViewById(R.id.TVcuisson);
-        tcuiss.setText(tcuissonFromBDD);
+        //Ingredient
+        TextView ingredient = (TextView) findViewById(aringredient);
+        String ringredient = db.ingredientrecette(i);
+        //String ringredient = "ringredient";
+        ingredient.setText(ringredient);
 
-        String diffFromBDD = myManager.searchData2(titreFlag, "facilite");
-        TextView diff = (TextView) findViewById(R.id.TVdiff);
-        diff.setText(diffFromBDD);
+        //Etape
+        TextView etape = (TextView) findViewById(aretape);
+        String retape = db.etaperecette(i);
+        //String retape = "retape";
+        etape.setText(retape);
 
-        String persFromBDD = myManager.searchData2(titreFlag, "nbr");
-        TextView nbr = (TextView) findViewById(R.id.TVnbr);
-        nbr.setText(persFromBDD);
+        //Rating
+        RatingBar rate = (RatingBar) findViewById(arrating);
+        Float rrate = db.searchRate(i);
+        //Float rrate = Float.parseFloat("1");
+        rate.setRating(rrate);
+
+
+        //Commentaire
+        TextView commentaire = (TextView) findViewById(arcom);
+        String rcom = db.searchCom(i);
+        //String rcom = "rcom";
+        commentaire.setText(rcom);
+
     }
-
-    public void onBtnClick(View v) {
-        if (v.getId() == R.id.bRetour) {
-            onBackPressed();
-        }
-    }
-
-
-
-
-
-
-
-import android.content.Intent;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import java.util.ArrayList;
-
-public class AfficherRecette extends AppCompatActivity {
-    android.support.v7.widget.Toolbar toolbar4;
-    ListView listView4;
-    DBHelper myManager = new DBHelper(this);
-
-
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.afficher_liste_recette);
-
-
-        String ingredient = getIntent().getStringExtra("ingredients");
-        toolbar4 = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar4);
-        toolbar4.setTitle("Recettes");
-        ArrayList<String> listerecette = new ArrayList<String>();
-        listerecette = myManager.getRecetteIngredient(ingredient);
-        listView4 = (ListView) findViewById(R.id.listView4);
-        ArrayAdapter<String> mAdapter4 = new ArrayAdapter<>(AfficherRecette.this, android.R.layout.simple_list_item_1, listerecette);
-        listView4.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            public void onItemClick(AdapterView<?> adapterView4, View view4, int i4, long l4){
-                Intent intent4 = new Intent(AfficherRecette.this, Main5Activity.class);
-                intent4.putExtra("recettes", listView4.getItemAtPosition(i4).toString());
-                startActivity(intent4);
-            }
-
-        });
-        listView4.setAdapter(mAdapter4);
-    }
-}
-
-    */
 }

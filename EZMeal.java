@@ -1,6 +1,7 @@
 package be.lsinf1225.ezmeal;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -40,13 +41,14 @@ public class EZMeal extends AppCompatActivity {
 
             //On vérifie la concordance du login et du mdp
             String mdp = manager.searchMdp(stre);
-            showMessage("Bienvenue", stre);
+
             if(strf.equals(mdp)){
+                showMessage("Bienvenue", stre);
                 //On enregisre le Login de l'utilisateur afin de savoir acceder a ses donnees
-                SharedPreferences info = getSharedPreferences("InfoUser",0);
+                SharedPreferences info = getPreferences(Context.MODE_PRIVATE);
                 SharedPreferences.Editor editeur = info.edit();
                 editeur.putString("LoginUser",((EditText)findViewById(R.id.ETemail)).getText().toString());
-                editeur.apply();
+                editeur.commit();
                 Toast.makeText(this, "Login Sauvé", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(EZMeal.this, Menu.class);
                 startActivity(i);

@@ -94,9 +94,7 @@ public class Inscription extends AppCompatActivity implements AdapterView.OnItem
                 u.setMdp(spassword);  //mdp
                 String sexestr = spinner3.getItemAtPosition(spinner3.getSelectedItemPosition()).toString();
                 u.setSexe(sexestr);  //sexe
-                //db.insertUser(u);
-                db.insertUtilisateur(slogin, spassword, sville, spays, "Homme", ijnaissance, imnaissance, ianaissance);
-                showMessage("Apres", "Insert");
+                db.insertUtilisateur(slogin, spassword, sville, spays, sexestr, ijnaissance, imnaissance, ianaissance);
                 Intent h = new Intent(Inscription.this, EZMeal.class); //changement d'activity
                 startActivity(h);
             }

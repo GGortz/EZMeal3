@@ -49,26 +49,26 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     //Table des catégories, sous-catégories
-    private static final String TABLE_NAME3 = "Categorie";
+    private static final String TABLE_NAME3 = "Categories";
     private static final String COLUMN_CAT = "Categorie";
     private static final String COLUMN_SCAT1 = "Souscategories";
 
     //Table des ingrédients
-    private static final String TABLE_NAME4 = "Ingredient";
-    private static final String COLUMN_INGREDIENT1 = "Ingredients";
+    private static final String TABLE_NAME4 = "Ingredients";
+    private static final String COLUMN_INGREDIENT1 = "Ingredient";
     private static final String COLUMN_SCAT2 = "Souscategorie";
 
 
     //Table des quantites par recette
     private static final String TABLE_NAME5 = "Tquantite";
-    private static final String COLUMN_INGREDIENT2 = "Ingredientt";
+    private static final String COLUMN_INGREDIENT2 = "Ingredientt2";
     private static final String COLUMN_QUANTITE = "Quantite";
-    private static final String COLUMN_NUMR2 = "NumR";
+    private static final String COLUMN_NUMR2 = "NumR2";
 
 
     //Table des etapes par recette
     private static final String TABLE_NAME6 = "Tetape";
-    private static final String COLUMN_NUMR3 = "NumR";
+    private static final String COLUMN_NUMR3 = "NumR3";
     private static final String COLUMN_NETAPE = "Netape";
     private static final String COLUMN_ACTION = "Action";
 
@@ -76,7 +76,7 @@ public class DBHelper extends SQLiteOpenHelper {
     //Table des reviews par recette
     private static final String TABLE_NAME7 = "Review";
     private static final String COLUMN_USER = "User";
-    private static final String COLUMN_NUMR4 = "NumR";
+    private static final String COLUMN_NUMR4 = "NumR4";
     private static final String COLUMN_DATE2 = "Date";
     private static final String COLUMN_NOTE = "Note";
     private static final String COLUMN_COMMENT = "Commentaire";
@@ -125,6 +125,21 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(query);
 
         //Ajout de quelque recette
+
+        ContentValues recette1 = new ContentValues();
+        recette1.put(COLUMN_NOMR, "Poulet aux champignons");
+        recette1.put(COLUMN_TPREPARATION, 10);
+        recette1.put(COLUMN_TCUISSON, 30);
+        recette1.put(COLUMN_NUMR1, 1);
+        recette1.put(COLUMN_NCOUV, 4);
+        recette1.put(COLUMN_DESCRIPTION, "Très bon repas passe partout. Beaucoup de succès avec les enfants");
+        recette1.put(COLUMN_DATE, "05/03/2017");
+        recette1.put(COLUMN_DIFFICULTE, "Moyen");
+        recette1.put(COLUMN_PHOTO, "r1");
+        recette1.put(COLUMN_TYPE, "Principal");
+        recette1.put(COLUMN_AUTEUR, "Admin");
+        recette1.put(COLUMN_COUT, "Moyen");
+        db.insert(TABLE_NAME2, null, recette1);
 
 
 
@@ -780,7 +795,22 @@ public class DBHelper extends SQLiteOpenHelper {
                 ");";
         db.execSQL(queryE);
 
-        //Ajout de quelques données
+        //Ajout de quelques données quantite
+        ContentValues tq1 = new ContentValues();
+        tq1.put(COLUMN_INGREDIENT2, "Poulet");
+        tq1.put(COLUMN_QUANTITE, "4");
+        tq1.put(COLUMN_NUMR2, 1);
+        db.insert(TABLE_NAME5, null, tq1);
+        ContentValues tq2 = new ContentValues();
+        tq2.put(COLUMN_INGREDIENT2, "Champignon de Paris");
+        tq2.put(COLUMN_QUANTITE, "150g");
+        tq2.put(COLUMN_NUMR2, 1);
+        db.insert(TABLE_NAME5, null, tq2);
+        ContentValues tq3 = new ContentValues();
+        tq3.put(COLUMN_INGREDIENT2, "Oignon");
+        tq3.put(COLUMN_QUANTITE, "1");
+        tq3.put(COLUMN_NUMR2, 1);
+        db.insert(TABLE_NAME5, null, tq3);
 
 
 
@@ -792,8 +822,32 @@ public class DBHelper extends SQLiteOpenHelper {
                 ");";
         db.execSQL(queryF);
 
-        //Ajout de quelques données
-
+        //Ajout de quelques données etapes
+        ContentValues te1 = new ContentValues();
+        te1.put(COLUMN_NUMR3, 1);
+        te1.put(COLUMN_NETAPE, 1);
+        te1.put(COLUMN_ACTION, "Nettoyer et emincer les champignons");
+        db.insert(TABLE_NAME6, null, te1);
+        ContentValues te2 = new ContentValues();
+        te2.put(COLUMN_NUMR3, 1);
+        te2.put(COLUMN_NETAPE, 2);
+        te2.put(COLUMN_ACTION, "Eplucher et emincer l'oignon");
+        db.insert(TABLE_NAME6, null, te2);
+        ContentValues te3 = new ContentValues();
+        te3.put(COLUMN_NUMR3, 1);
+        te3.put(COLUMN_NETAPE, 3);
+        te3.put(COLUMN_ACTION, "Saisir les cuisses de poulets");
+        db.insert(TABLE_NAME6, null, te3);
+        ContentValues te4 = new ContentValues();
+        te4.put(COLUMN_NUMR3, 1);
+        te4.put(COLUMN_NETAPE, 4);
+        te4.put(COLUMN_ACTION, "Ajouter les oignons et les champignons");
+        db.insert(TABLE_NAME6, null, te4);
+        ContentValues te5 = new ContentValues();
+        te5.put(COLUMN_NUMR3, 1);
+        te5.put(COLUMN_NETAPE, 5);
+        te5.put(COLUMN_ACTION, "Laisser cuire le tout 5 min");
+        db.insert(TABLE_NAME6, null, te5);
 
 
         //Création de la table Review
@@ -807,7 +861,13 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(queryG);
 
         //Ajout de quelque review
-
+        ContentValues rev1 = new ContentValues();
+        rev1.put(COLUMN_USER, "Admin");
+        rev1.put(COLUMN_NUMR4, 1);
+        rev1.put(COLUMN_DATE2, "05/05/2017");
+        rev1.put(COLUMN_NOTE, 2);
+        rev1.put(COLUMN_COMMENT, "Toujours très plaisant à manger");
+        db.insert(TABLE_NAME7, null, rev1);
 
     }
 
@@ -885,7 +945,7 @@ public class DBHelper extends SQLiteOpenHelper {
             do{
                 x = cu.getInt(cu.getColumnIndex(COLUMN_NUMR1));
                 if(x==id){
-                    y = cu.getString(cu.getColumnIndex(dataColumn));
+                    y = cu.getString(cu.getColumnIndex(dataColumn))+"\n";
                     break;
                 }
             }
@@ -897,13 +957,39 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //On recherche les étapes d'une recette via son ID
     public String etaperecette(int id){
-        return "rien";
+        SQLiteDatabase db = this.getReadableDatabase();
+        String recquete = "SELECT "+COLUMN_ACTION+" FROM "+TABLE_NAME6+ " WHERE "+COLUMN_NUMR3+" == "+id+" ORDER BY "+COLUMN_NETAPE;  //a vérifier
+        Cursor cu = db.rawQuery(recquete, null);
+        String y="";
+        if(cu.moveToFirst()){
+            do{
+                String s;
+                s=cu.getString(0);
+                y=y+s+"\n";
+            }while (cu.moveToNext());
+        }
+        cu.close();
+        return y;
     }
 
 
     //On recherche les ingrédients d'une recette via son ID
     public String ingredientrecette(int id){
-        return "rien";
+        SQLiteDatabase db = this.getReadableDatabase();
+        String req = "SELECT "+COLUMN_INGREDIENT2+", "+COLUMN_QUANTITE+" FROM "+TABLE_NAME5+" WHERE "+COLUMN_NUMR2+" == "+id;  //a vérifier
+        Cursor cu = db.rawQuery(req, null);
+        String y="";
+        if (cu.moveToFirst()){
+            do{
+                String s;
+                String p;
+                s=cu.getString(0);
+                p=cu.getString(1);
+                y=y+p+", "+s+"\n";
+            }while (cu.moveToNext());
+        }
+        cu.close();
+        return y;
     }
 
 
@@ -924,14 +1010,27 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //Création d'un arraylist qui contient les titres des recettes en fct d'un des ingredients présents
+    //NE FONCTIONNE PAS
     public ArrayList<String> getRecetteIngredient(String ingre){
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT NomR FROM Recette WHERE NomR, Tquantite WHERE Tquantite.Ingredient == '"+ingre+"' AND Recette.NumR == Tquantite.NumR";   //a verifier
+        //String query = "SELECT NomR FROM Recette, Tquantite WHERE Tquantite.Ingredientt2 == '"+ingre+"' AND Recette.NumR == Tquantite.NumR2";
+        //String query = "SELECT "+COLUMN_NOMR+" FROM "+TABLE_NAME2+", "+TABLE_NAME5+" WHERE "+COLUMN_NUMR1+" == "+COLUMN_NUMR2+" AND "+COLUMN_INGREDIENT2+" == "+ingre;//a verifier
+        //String query = "SELECT NomR FROM Recette WHERE NumR == (SELECT NumR2 FROM Tquantite WHERE Ingredient2== '"+ingre+"')";
+        String query = "SELECT "+COLUMN_NUMR2+" FROM "+TABLE_NAME5+" WHERE "+COLUMN_INGREDIENT2+" == "+ingre;
+        int i;
         Cursor c = db.rawQuery(query, null);
         ArrayList<String> listRecette = new ArrayList<>();
         c.moveToFirst();
         while(!c.isAfterLast()){
-            listRecette.add(c.getString(c.getColumnIndex(COLUMN_NOMR)));
+            i=(c.getInt(c.getColumnIndex(COLUMN_NUMR2)));
+            String query2 = "SELECT "+COLUMN_NOMR+" FROM "+TABLE_NAME+" WHERE "+COLUMN_NUMR1+" == "+i;
+            Cursor c2 = db.rawQuery(query2, null);
+            c2.moveToFirst();
+            while(!c.isAfterLast()){
+                listRecette.add(c2.getString(c2.getColumnIndex(COLUMN_NOMR)));
+                c2.moveToNext();
+            }
+            c2.close();
             c.moveToNext();
         }
         c.close();
@@ -1000,16 +1099,60 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-/*
+
     public void insertUtilisateur(String slogin, String spassword, String sville, String spays, String homme, int ijnaissance, int imnaissance, int ianaissance) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String partie2 = "VALUES '"+slogin+"', '"+spassword+"', '"+sville+"', '"+spays+"', '"+homme+"', '"+ijnaissance+"', '"+imnaissance+"', '"+ianaissance+"'";
+        String partie2 = "VALUES ('"+slogin+"', '"+spassword+"', '"+sville+"', '"+spays+"', '"+homme+"', "+ijnaissance+", "+imnaissance+", "+ianaissance+")";
         String partie1 = "INSERT INTO Utilisateur ('Login', 'Password', 'Ville', 'Pays', 'Sexe', 'Jour', 'Mois', 'Annee') ";
         String complet = partie1+partie2;
         db.execSQL(complet);
 
     }
-*/
+
+    public int getId(String nomrecette) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT NumR FROM Recette WHERE NomR == '"+nomrecette+"'";
+        int i=0;
+        Cursor c = db.rawQuery(query, null);
+        if (c.moveToFirst()){
+            i=c.getInt(c.getColumnIndex(COLUMN_NUMR1));
+            c.close();
+        }
+        return i;
+    }
+
+    public String searchCom(int i) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT "+COLUMN_COMMENT+" FROM "+TABLE_NAME7+" WHERE "+COLUMN_NUMR4+" == "+i;
+        Cursor c = db.rawQuery(query, null);
+        String y="";
+        if(c.moveToFirst()){
+            do {
+                y=y+c.getString(c.getColumnIndex(COLUMN_COMMENT))+"\n";
+            }while (c.moveToNext());
+        }
+        return y;
+    }
+
+    public float searchRate(int i) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT "+COLUMN_NOTE+" FROM "+TABLE_NAME7+" WHERE "+COLUMN_NUMR4+" == "+i;
+        int somme=0;
+        int nbre=0;
+        String y ="0";
+        Cursor c= db.rawQuery(query, null);
+        if(c.moveToFirst()){
+            do {
+                somme = somme+c.getInt(c.getColumnIndex(COLUMN_NOTE));
+                nbre++;
+            }while(c.moveToNext());
+            double moyenne = (double) somme/nbre;
+            y=Double.toString(moyenne);
+        }
+        float b = Float.parseFloat(y);
+        return b;
+
+    }
 }
 
 
@@ -1023,39 +1166,3 @@ public class DBHelper extends SQLiteOpenHelper {
         db.insert(TABLE_NAME4, null, ingredient100);
 */
 
-
-
-/*
-
-        ContentValues Pouletchampi = new ContentValues();
-        Pouletchampi.put(COLUMN_NOMR, "Poulet aux champignons");
-        Pouletchampi.put(COLUMN_TPREPARATION, 10);
-        Pouletchampi.put(COLUMN_TCUISSON, 30);
-        Pouletchampi.put(COLUMN_NUMR1, 1);
-        Pouletchampi.put(COLUMN_NCOUV, 4);
-        Pouletchampi.put(COLUMN_DESCRIPTION, "Très bon repas passe partout. Beaucoup de succès avec les enfants");
-        Pouletchampi.put(COLUMN_DATE, "05/03/2017");
-        Pouletchampi.put(COLUMN_DIFFICULTE, "Moyen");
-        Pouletchampi.put(COLUMN_COUT, "Moyen");
-        Pouletchampi.put(COLUMN_PHOTO, "imgPoulet");
-        Pouletchampi.put(COLUMN_TYPE, "Principal");
-        Pouletchampi.put(COLUMN_CHAUD, 1);
-        Pouletchampi.put(COLUMN_AUTEUR, "Admin");
-        db.insert(TABLE_NAME2, null, Pouletchampi);
-        ContentValues pouletchampi2 = new ContentValues();
-        pouletchampi2.put(COLUMN_QUANTITE, "4 cuisses");
-        pouletchampi2.put(COLUMN_NUMR2, 1);
-        pouletchampi2.put(COLUMN_INGREDIENT2, "Poulet");
-        db.insert(TABLE_NAME5, null, pouletchampi2);
-        ContentValues pouletchampi3 = new ContentValues();
-        pouletchampi3.put(COLUMN_QUANTITE, "150g");
-        pouletchampi3.put(COLUMN_NUMR2, 1);
-        pouletchampi3.put(COLUMN_INGREDIENT2, "Champignons de Paris");
-        db.insert(TABLE_NAME5, null, pouletchampi3);
-        ContentValues pouletchampi4 = new ContentValues();
-        pouletchampi4.put(COLUMN_QUANTITE, "1");
-        pouletchampi4.put(COLUMN_NUMR2, 1);
-        pouletchampi4.put(COLUMN_INGREDIENT2, "Oignon");
-        db.insert(TABLE_NAME5, null, pouletchampi4);
-
-*/

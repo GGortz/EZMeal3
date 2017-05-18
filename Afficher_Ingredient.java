@@ -1,5 +1,6 @@
 package be.lsinf1225.ezmeal;
 
+import android.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -37,12 +38,20 @@ public class Afficher_Ingredient  extends AppCompatActivity{
         ArrayAdapter<String> mAdapter3 = new ArrayAdapter<>(Afficher_Ingredient.this, android.R.layout.simple_list_item_1, listeingredient);
         listView3.setOnItemClickListener (new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> adapterView3, View view3, int i3, long l3){
-                Intent intent3 = new Intent(Afficher_Ingredient.this, Afficher_Recette.class);
-                intent3.putExtra("ingredients", listView3.getItemAtPosition(i3).toString());
+                Intent intent3 = new Intent(Afficher_Ingredient.this, Afficher_recette2.class);
+                intent3.putExtra("ingre", listView3.getItemAtPosition(i3).toString());
                 startActivity(intent3);
             }
 
         });
         listView3.setAdapter(mAdapter3);
+    }
+    //SHOW MESSAGE
+    public void showMessage(String titre, String contenu){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(titre);
+        builder.setMessage(contenu);
+        builder.show();
     }
 }
